@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: rag_chatbot_ollama
+    entrypoint: ["/bin/ollama"]
+    command: ["serve"]
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - NVIDIA_VISIBLE_DEVICES=all
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    networks:
+      - local_rag_network
+    restart: always
+
+  db:
+    image: timescale/timescaledb-ha:pg16
+    container_name: rag_chatbot_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=rag_database
+      - PGDATA=/home/postgres/pgdata/data
+      - PGBACKREST_CONFIG=/home/postgres/pgdata/backup/pgbackrest.conf
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+    ports:
+      - "5432:5432"
+    networks:
+      - local_rag_network
+    restart: always
+
+volumes:
+  ollama:
+
+networks:
+  local_rag_network:
+    driver: bridge
