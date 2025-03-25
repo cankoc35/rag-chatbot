@@ -1,3 +1,5 @@
+# Sends query requests to the correct backend service via NATS messaging.
+# Looks up the target subject based on the query name and publishes a message with extracted parameters.
 
 import asyncio
 import json

@@ -1,3 +1,6 @@
+# Central registry of all available query templates in the system.
+# Each entry defines the query name, description, required parameters, and corresponding endpoint.
+# Used by the router agent to match user intent to a known query type.
 
 QUERY_BANK = [
     {

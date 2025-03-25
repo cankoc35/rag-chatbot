@@ -1,3 +1,7 @@
+# Old LangChain agent setup for autonomous tool execution.
+# Automatically builds and executes SQL queries based on user questions.
+# Replaced by the router-dispatcher system, but can be reused for multi-tool agent workflows.
+
 from langchain.agents import initialize_agent, AgentType
 from langchain.tools import Tool
 from llm.ollama_llm import get_llm

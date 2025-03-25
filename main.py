@@ -1,3 +1,7 @@
+# Entry point for the RAG chatbot system.
+# Handles user input, routes questions to the correct query type using the router agent,
+# and dispatches requests to the appropriate service via NATS messaging.
+
 import asyncio
 from dispatcher import dispatch_query_nats
 from router_agent import route_user_question

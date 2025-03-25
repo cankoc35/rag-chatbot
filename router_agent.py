@@ -1,3 +1,7 @@
+# Router agent that analyzes the user's natural language question.
+# Determines which predefined query should be executed and extracts necessary parameters.
+# If required parameters are missing, it prompts the user with a follow-up question.
+
 from langchain import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.llms import Ollama
