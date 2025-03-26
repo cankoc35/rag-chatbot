@@ -32,10 +32,18 @@ async def run():
         print(f"[Received] total_distance_by_date → plate: {plate}, start: {start}, end: {end}")
         result = f"Vehicle {plate} traveled 500 km between {start} and {end}."
         await msg.respond(result.encode())
+        
+    async def handle_current_location_by_plate(msg):
+        data = json.loads(msg.data.decode())
+        plate = data.get("plate", "unknown plate")
+        print(f"[Received] current_location_by_plate → plate: {plate}")
+        result = f"Vehicle {plate} is currently in İzmir."
+        await msg.respond(result.encode())
 
     await nc.subscribe("vehicle_route_by_date", cb=vehicle_route_by_date_handler)
     await nc.subscribe("shipment_status_by_plate", cb=shipment_status_by_plate_handler)
     await nc.subscribe("total_distance_by_date", cb=handle_total_distance_by_date)
+    await nc.subscribe("current_location_by_plate", cb=handle_current_location_by_plate)
 
     print("🟢 NATS test subscriber listening on subjects: vehicle_route_by_date, shipment_status_by_plate ...")
     while True:

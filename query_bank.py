@@ -20,5 +20,11 @@ QUERY_BANK = [
         "description": "Get total distance traveled by a vehicle in a given date range.",
         "params": ["plate", "start_date", "end_date"],
         "endpoint": "/vehicle/distance"
+    },
+    {
+        "name": "current_location_by_plate",
+        "description": "Get current location of a specific vehicle.",
+        "params": ["plate"],
+        "endpoint": "/vehicle/current_location"
     }
 ]
