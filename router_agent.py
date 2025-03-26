@@ -4,7 +4,7 @@
 
 from langchain import LLMChain
 from langchain.prompts import PromptTemplate
-from langchain.llms import Ollama
+from langchain_ollama import OllamaLLM
 from query_bank import QUERY_BANK
 from config.config import OLLAMA_MODEL
 import json
@@ -30,7 +30,7 @@ prompt = PromptTemplate(
     input_variables=["question"]
 )
 
-llm = Ollama(model=OLLAMA_MODEL)
+llm = OllamaLLM(model=OLLAMA_MODEL)
 router_chain = LLMChain(llm=llm, prompt=prompt)
 
 def route_user_question(question: str) -> dict:
